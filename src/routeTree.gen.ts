@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as NastroikiRouteImport } from './routes/nastroiki'
+import { Route as OtpuskiRouteImport } from './routes/otpuski'
+import { Route as PotrebiteliRouteImport } from './routes/potrebiteli'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NastroikiRoute = NastroikiRouteImport.update({
+  id: '/nastroiki',
+  path: '/nastroiki',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OtpuskiRoute = OtpuskiRouteImport.update({
+  id: '/otpuski',
+  path: '/otpuski',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PotrebiteliRoute = PotrebiteliRouteImport.update({
+  id: '/potrebiteli',
+  path: '/potrebiteli',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/nastroiki': typeof NastroikiRoute
+  '/otpuski': typeof OtpuskiRoute
+  '/potrebiteli': typeof PotrebiteliRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/nastroiki': typeof NastroikiRoute
+  '/otpuski': typeof OtpuskiRoute
+  '/potrebiteli': typeof PotrebiteliRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/nastroiki': typeof NastroikiRoute
+  '/otpuski': typeof OtpuskiRoute
+  '/potrebiteli': typeof PotrebiteliRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/nastroiki' | '/otpuski' | '/potrebiteli'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/nastroiki' | '/otpuski' | '/potrebiteli'
+  id: '__root__' | '/' | '/nastroiki' | '/otpuski' | '/potrebiteli'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  NastroikiRoute: typeof NastroikiRoute
+  OtpuskiRoute: typeof OtpuskiRoute
+  PotrebiteliRoute: typeof PotrebiteliRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/nastroiki': {
+      id: '/nastroiki'
+      path: '/nastroiki'
+      fullPath: '/nastroiki'
+      preLoaderRoute: typeof NastroikiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/otpuski': {
+      id: '/otpuski'
+      path: '/otpuski'
+      fullPath: '/otpuski'
+      preLoaderRoute: typeof OtpuskiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/potrebiteli': {
+      id: '/potrebiteli'
+      path: '/potrebiteli'
+      fullPath: '/potrebiteli'
+      preLoaderRoute: typeof PotrebiteliRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  NastroikiRoute: NastroikiRoute,
+  OtpuskiRoute: OtpuskiRoute,
+  PotrebiteliRoute: PotrebiteliRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
